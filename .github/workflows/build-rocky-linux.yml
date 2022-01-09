@@ -1,4 +1,4 @@
-name: Build Linux
+name: Build Rocky Linux
 
 on:
   push:
@@ -27,8 +27,8 @@ jobs:
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: latest-linux
+        automatic_release_tag: latest-rocky-linux
         prerelease: true
-        title: Gpuvis Linux
+        title: Gpuvis Rocky Linux
         files: |
           build/gpuvis

@@ -1,0 +1,30 @@
+name: Build Rocky Linux
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  container:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Get deps
+      run: |
+        apt install libsdl2-dev ninja-build libgtk-3-dev cmake clang build-essential -y
+      shell: bash
+    - name: Build
+      run: |
+        mkdir -p build
+        cd build
+        cmake .. -GNinja
+        ninja
+      shell: bash
+    - uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: latest-ubuntu-linux
+        prerelease: true
+        title: Gpuvis Ubuntu Linux
+        files: |
+          build/gpuvis
