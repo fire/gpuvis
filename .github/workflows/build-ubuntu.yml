@@ -1,11 +1,11 @@
-name: Build Ubuntu Linux
+name: Build Linux
 
 on:
   push:
     branches: [ master ]
 
 jobs:
-  build-ubuntu-linux:
+  build-linux:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -31,8 +31,8 @@ jobs:
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: latest-ubuntu-linux
+        automatic_release_tag: latest-linux
         prerelease: true
-        title: Gpuvis Ubuntu Linux
+        title: Gpuvis Linux
         files: |
           build/gpuvis
