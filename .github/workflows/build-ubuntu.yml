@@ -9,6 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    # Azure repositories are not reliable, we need to prevent Azure giving us packages.
+    - name: Make apt sources.list use the default Ubuntu repositories
+      run: |
+        sudo rm -f /etc/apt/sources.list.d/*
+        sudo cp -f misc/ci/sources.list /etc/apt/sources.list
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+        sudo apt-add-repository "deb http://apt.llvm.org/focal/ llvm-toolchain-focal-13 main"
+        sudo apt-get update
     - name: Get deps
       run: |
         sudo apt install libsdl2-dev ninja-build libgtk-3-dev cmake clang build-essential -y
