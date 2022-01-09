@@ -15,8 +15,7 @@ jobs:
         dnf install dnf-plugins-core -y
         dnf install epel-release -y
         dnf config-manager --set-enabled powertools -y
-        yum install SDL2-devel ninja-build gtk3-devel cmake clang -y 
-        ninja
+        yum install SDL2-devel ninja-build gtk3-devel cmake clang -y
       shell: bash
     - name: Build
       run: |
