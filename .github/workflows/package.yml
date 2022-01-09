@@ -15,7 +15,14 @@ jobs:
         dnf install dnf-plugins-core -y
         dnf install epel-release -y
         dnf config-manager --set-enabled powertools -y
-        yum install SDL2-devel ninja-build gtk3-devel -y 
+        yum install SDL2-devel ninja-build gtk3-devel cmake clang -y 
+        ninja
+      shell: bash
+    - name: Build
+      run: |
+        mkdir -p build
+        cd build
+        cmake .. -GNinja
         ninja
       shell: bash
     - uses: "marvinpinto/action-automatic-releases@latest"
