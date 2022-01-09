@@ -14,9 +14,8 @@ jobs:
       run: |
         dnf install dnf-plugins-core -y
         dnf install epel-release -y
-        dnf config-manager --set-enabled powertools
-        dnf update
-        yum install -y SDL2-devel ninja-build gtk3-devel
+        dnf config-manager --set-enabled powertools -y
+        yum install SDL2-devel ninja-build gtk3-devel -y 
         ninja
       shell: bash
     - uses: "marvinpinto/action-automatic-releases@latest"
