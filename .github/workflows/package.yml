@@ -1,0 +1,33 @@
+name: Build Linux
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  container:
+    runs-on: ubuntu-latest
+      container: rockylinux:8
+    steps:
+    - uses: actions/checkout@v2
+    - name: Get deps
+      run: |
+        sudo yum install -y SDL2-devel
+      shell: bash
+    - name: Copy licenses
+      run: |
+        cp LICENSE build/install/
+      shell: bash
+    - uses: papeloto/action-zip@v1
+      with:
+        files: build/install/
+        recursive: false
+        dest: gpuvis-linux.zip
+    - uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: latest-linux
+        prerelease: true
+        title: Gpuvis Linux
+        files: |
+          gpuvis-linux.zip
