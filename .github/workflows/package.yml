@@ -7,7 +7,7 @@ on:
 jobs:
   container:
     runs-on: ubuntu-latest
-      container: rockylinux:8
+    container: rockylinux:8
     steps:
     - uses: actions/checkout@v2
     - name: Get deps
